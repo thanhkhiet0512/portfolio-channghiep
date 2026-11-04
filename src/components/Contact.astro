@@ -1,0 +1,38 @@
+---
+import { site, type Lang } from '../data/profile';
+import { useT } from '../data/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+---
+<section id="contact" class="relative overflow-hidden border-t border-line">
+  <div class="mesh-bg absolute inset-0 -z-10"></div>
+  <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
+    <div class="reveal max-w-3xl">
+      <p class="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent">{t('contact.eyebrow')}</p>
+      <h2 class="font-display text-3xl font-semibold leading-tight tracking-tight sm:text-5xl">{t('contact.title')}</h2>
+      <p class="mt-5 max-w-xl text-lg text-muted">{t('contact.body')}</p>
+      <div class="mt-10 flex flex-wrap items-center gap-3">
+        <a href={`mailto:${site.email}`} class="rounded-full bg-accent text-on-accent px-6 py-3 font-medium transition hover:brightness-110">{t('contact.email')}</a>
+        <button type="button" data-copy={site.email} data-done={t('contact.copied')} class="group flex items-center gap-2 rounded-full border border-line bg-surface px-5 py-3 font-mono text-sm transition hover:border-accent/60">
+          <span class="break-all">{site.email}</span>
+          <span class="copy-label text-xs text-muted group-hover:text-accent">{t('contact.copy')}</span>
+        </button>
+        <a href={site.linkedin} target="_blank" rel="noopener" class="rounded-full border border-line bg-surface px-5 py-3 text-sm font-medium transition hover:border-accent/60">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) => {
+    b.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(b.dataset.copy!);
+        const l = b.querySelector('.copy-label')!;
+        const prev = l.textContent;
+        l.textContent = b.dataset.done!;
+        setTimeout(() => (l.textContent = prev), 1600);
+      } catch (e) {}
+    });
+  });
+</script>

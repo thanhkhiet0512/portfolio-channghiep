@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import CaseArt from '../components/CaseArt.astro';
+import Contact from '../components/Contact.astro';
+import { talks, type Lang } from '../data/profile';
+import { useT, href } from '../data/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+---
+<Base lang={lang} title={t('talk.title')}>
+  <section class="mesh-bg border-b border-line">
+    <div class="mx-auto max-w-6xl px-4 pb-14 pt-36 sm:px-6">
+      <p class="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-accent">{t('talk.eyebrow')}</p>
+      <h1 class="font-display text-4xl font-bold tracking-tight sm:text-6xl">{t('talk.title')}</h1>
+    </div>
+  </section>
+  <section class="mx-auto max-w-6xl space-y-6 px-4 py-16 sm:px-6">
+    {talks.map((k) => (
+      <article class="grid overflow-hidden rounded-3xl border border-line bg-surface md:grid-cols-[1.2fr_1fr]">
+        <div class="p-8 sm:p-10">
+          <div class="flex flex-wrap gap-2 font-mono text-xs uppercase tracking-wider text-muted">
+            <span class="text-warm">{k.year}</span><span>·</span><span>{k.event}</span><span>·</span><span>{k.place[lang]}</span><span>·</span><span>{k.type[lang]}</span>
+          </div>
+          <h2 class="mt-4 font-display text-2xl font-semibold leading-snug sm:text-3xl">{k.title}</h2>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href={href(lang, `/work/${k.project}`)} class="rounded-full bg-accent text-on-accent px-5 py-2.5 text-sm font-medium hover:brightness-110">{t('talk.read')} →</a>
+            <a href={k.url} target="_blank" rel="noopener" class="rounded-full border border-line px-5 py-2.5 text-sm font-medium hover:border-accent/60">{t('talk.event')} ↗</a>
+          </div>
+        </div>
+        <div class="min-h-56 border-t border-line bg-surface-2 text-ink md:border-l md:border-t-0"><CaseArt art="tank" /></div>
+      </article>
+    ))}
+  </section>
+  <Contact lang={lang} />
+</Base>

@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import WorkCard from '../components/WorkCard.astro';
+import Contact from '../components/Contact.astro';
+import { projects, industries, type Lang, type Industry } from '../data/profile';
+import { useT } from '../data/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const used = [...new Set(projects.map((p) => p.industry))] as Industry[];
+---
+<Base lang={lang} title={t('work.title')}>
+  <section class="mesh-bg border-b border-line">
+    <div class="mx-auto max-w-6xl px-4 pb-14 pt-36 sm:px-6">
+      <p class="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-accent">{t('work.eyebrow')}</p>
+      <h1 class="font-display text-4xl font-bold tracking-tight sm:text-6xl">{t('work.title')}</h1>
+      <p class="mt-5 max-w-2xl text-lg text-muted">{t('work.note')}</p>
+      <div class="mt-8 flex flex-wrap gap-2" role="group">
+        <button type="button" data-filter="all" aria-pressed="true" class="filter rounded-full border border-line bg-surface px-4 py-1.5 text-sm">{t('work.filter.all')}</button>
+        {used.map((i) => (
+          <button type="button" data-filter={i} aria-pressed="false" class="filter rounded-full border border-line bg-surface px-4 py-1.5 text-sm">{industries[i][lang]}</button>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {projects.map((p) => <WorkCard p={p} lang={lang} />)}
+    </div>
+  </section>
+  <Contact lang={lang} />
+</Base>
+<style>
+  .filter[aria-pressed='true'] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+</style>
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.filter');
+  btns.forEach((b) => b.addEventListener('click', () => {
+    btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    const f = b.dataset.filter;
+    document.querySelectorAll<HTMLElement>('.work-card').forEach((c) => {
+      c.hidden = f !== 'all' && c.dataset.industry !== f;
+    });
+  }));
+</script>

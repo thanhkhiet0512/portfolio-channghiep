@@ -1,0 +1,33 @@
+---
+import CaseArt from './CaseArt.astro';
+import { industries, type Lang, type Project } from '../data/profile';
+import { href } from '../data/i18n';
+interface Props { p: Project; lang: Lang; large?: boolean }
+const { p, lang, large = false } = Astro.props;
+---
+<a
+  href={href(lang, `/work/${p.slug}`)}
+  data-industry={p.industry}
+  class:list={['work-card reveal group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition duration-300 hover:-translate-y-1 hover:border-accent/60 hover:shadow-[0_20px_60px_-30px_rgba(56,189,248,0.5)]', large && 'md:col-span-full']}
+>
+  <div class:list={['relative overflow-hidden border-b border-line bg-surface-2 text-ink', large ? 'aspect-[16/7]' : 'aspect-[16/10]']}>
+    <CaseArt art={p.art} class="transition duration-500 group-hover:scale-[1.03]" />
+    {p.highlight && (
+      <span class="absolute left-3 top-3 rounded-full bg-warm/15 px-2.5 py-1 font-mono text-[11px] font-medium text-warm ring-1 ring-warm/40 backdrop-blur">★ {p.highlight[lang]}</span>
+    )}
+    {p.metric && (
+      <span class="absolute bottom-3 right-3 rounded-lg bg-bg/80 px-3 py-1.5 text-right ring-1 ring-line backdrop-blur">
+        <span class="block font-display text-xl font-bold leading-none text-accent">{p.metric.value}</span>
+        <span class="font-mono text-[10px] uppercase tracking-wider text-muted">{p.metric.label[lang]}</span>
+      </span>
+    )}
+  </div>
+  <div class="flex flex-1 flex-col gap-2 p-5">
+    <div class="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-muted">
+      <span class="text-accent">{industries[p.industry][lang]}</span><span>·</span><span>{p.org}</span><span>·</span><span>{p.period}</span>
+    </div>
+    <h3 class="font-display text-lg font-semibold leading-snug tracking-tight sm:text-xl">{p.title[lang]}</h3>
+    <p class="text-sm leading-relaxed text-muted">{p.summary[lang]}</p>
+    <span class="mt-auto pt-2 text-sm font-medium text-accent">→</span>
+  </div>
+</a>

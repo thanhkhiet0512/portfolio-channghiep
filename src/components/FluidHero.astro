@@ -1,0 +1,80 @@
+---
+import { site, type Lang } from '../data/profile';
+import { useT, href } from '../data/i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+---
+<section data-hero class="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#070c16] text-[#e6edf7]">
+  <!-- Static fallback: streamlines (shown under the canvas, and alone without WebGL) -->
+  <svg class="fallback-lines absolute inset-0 -z-20 h-full w-full opacity-40 transition-opacity duration-700" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="sl" x1="0" x2="1">
+        <stop offset="0" stop-color="#0284c7" />
+        <stop offset=".5" stop-color="#22d3ee" />
+        <stop offset=".8" stop-color="#fbbf24" />
+        <stop offset="1" stop-color="#f87171" />
+      </linearGradient>
+    </defs>
+    {Array.from({ length: 16 }, (_, i) => {
+      const y = 40 + i * 48;
+      const bend = Math.max(0, 60 - Math.abs(y - 400) * 0.25);
+      const dir = y < 400 ? -1 : 1;
+      return <path d={`M0 ${y} C 300 ${y}, 380 ${y + dir * bend}, 600 ${y + dir * bend} S 900 ${y}, 1200 ${y}`} fill="none" stroke="url(#sl)" stroke-width="1.2" />;
+    })}
+  </svg>
+  <canvas id="fluid" class="absolute inset-0 -z-10 h-full w-full" aria-hidden="true"></canvas>
+  <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,transparent_40%,#070c16_100%)]"></div>
+  <div class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#070c16]/75 via-[#070c16]/25 to-transparent md:via-30%"></div>
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-[#070c16]"></div>
+
+  <div class="mx-auto w-full max-w-6xl px-4 pb-24 pt-32 sm:px-6">
+    <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-sky-200/90 backdrop-blur sm:text-xs">
+      <span class="h-1.5 w-1.5 rounded-full bg-amber-300 shadow-[0_0_10px_#fbbf24]"></span>
+      {t('hero.eyebrow')}
+    </p>
+    <h1 class="font-display text-[clamp(3rem,11vw,8.5rem)] font-bold leading-[0.92] tracking-[-0.04em]">
+      <span data-obstacle class="inline-block">Nghiep</span><br />
+      <span data-obstacle class="inline-block">Nguyen</span>
+    </h1>
+    <p class="mt-8 max-w-xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+      <span class="font-medium text-white">{site.tagline[lang]}</span>
+      {' '}{site.intro[lang]}
+    </p>
+    <div class="mt-10 flex flex-wrap items-center gap-3">
+      <a href={href(lang, '/work')} class="rounded-full bg-sky-400 px-6 py-3 font-medium text-[#04111d] transition hover:bg-sky-300">
+        {t('hero.cta.work')} →
+      </a>
+      <a href={`mailto:${site.email}`} class="rounded-full border border-white/20 bg-white/5 px-6 py-3 font-medium text-white backdrop-blur transition hover:bg-white/10">
+        {t('hero.cta.contact')}
+      </a>
+    </div>
+  </div>
+
+  <div class="absolute inset-x-0 bottom-6 mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 font-mono text-[11px] text-slate-400 sm:px-6">
+    <span class="hidden items-center gap-2 sm:flex">
+      <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span></span>
+      {t('hero.hint')}
+    </span>
+    <span class="flex items-center gap-2">
+      <span>|U|</span><span class="colormap-bar h-1.5 w-24 rounded-full"></span>
+    </span>
+  </div>
+</section>
+
+<style>
+  .fluid-on .fallback-lines { opacity: 0; }
+</style>
+
+<script>
+  import { startFluid } from '../scripts/fluid';
+  const canvas = document.getElementById('fluid') as HTMLCanvasElement | null;
+  if (canvas) {
+    try {
+      startFluid(canvas, () => Array.from(document.querySelectorAll('[data-obstacle]')));
+    } catch (e) {
+      console.warn('[fluid] disabled', e);
+    }
+  }
+</script>

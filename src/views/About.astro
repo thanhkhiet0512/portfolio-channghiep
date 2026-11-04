@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import Contact from '../components/Contact.astro';
+import { site, skills, certifications, journey, type Lang } from '../data/profile';
+import { photos } from '../data/photos';
+import { useT } from '../data/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const edu = journey.find((j) => j.kind === 'edu')!;
+const principles = [1, 2, 3] as const;
+---
+<Base lang={lang} title={t('nav.about')}>
+  <section class="mesh-bg border-b border-line">
+    <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-16 pt-36 sm:px-6 md:grid-cols-[1fr_340px]">
+      <div>
+        <p class="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-accent">{t('about.eyebrow')}</p>
+        <h1 class="font-display text-4xl font-bold leading-tight tracking-tight sm:text-6xl">{t('about.title')}</h1>
+        <p class="mt-6 text-lg text-muted">{site.fullName} · {site.role[lang]} · {site.location[lang]}</p>
+      </div>
+      <figure class="relative mx-auto w-64 md:w-full">
+        <div class="absolute -inset-3 -z-10 rounded-[2rem] colormap-bar opacity-40 blur-2xl"></div>
+        <img src="/avatar.png" alt={lang === 'en' ? 'Portrait of Nghiep Nguyen in Tokyo' : 'Chân dung Nghiệp Nguyễn tại Tokyo'} width="400" height="400" class="aspect-square w-full rounded-[1.75rem] border border-line object-cover" />
+        <figcaption class="mt-3 text-center font-mono text-xs text-muted">Tokyo, Japan</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+    <div class="prose-tight space-y-5 text-lg leading-relaxed">
+      <p>{t('about.p1')}</p>
+      <p>{t('about.p2')}</p>
+      <p>{t('about.p3')}</p>
+    </div>
+  </section>
+
+  {photos.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+      <div class:list={['grid gap-4', photos.length > 1 && 'sm:grid-cols-2']}>
+        {photos.map((ph) => (
+          <img src={ph.src} alt={ph.alt[lang]} loading="lazy" class="aspect-[4/3] w-full rounded-2xl border border-line object-cover" />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="border-y border-line bg-surface-2/40">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <h2 class="mb-8 font-display text-2xl font-semibold">{t('about.principles')}</h2>
+      <div class="grid gap-5 md:grid-cols-3">
+        {principles.map((n) => (
+          <div class="reveal rounded-2xl border border-line bg-surface p-6">
+            <div class="font-mono text-xs text-accent">0{n}</div>
+            <h3 class="mt-2 font-display text-lg font-semibold">{t(`about.pr${n}.t`)}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{t(`about.pr${n}.b`)}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-6xl gap-14 px-4 py-20 sm:px-6 md:grid-cols-2">
+    <div>
+      <h2 class="mb-6 font-display text-2xl font-semibold">{t('about.skills')}</h2>
+      <div class="space-y-6">
+        {skills.map((g) => (
+          <div>
+            <h3 class="mb-2 font-mono text-xs uppercase tracking-wider text-muted">{g.group[lang]}</h3>
+            <div class="flex flex-wrap gap-1.5">
+              {g.items.map((s) => <span class="rounded-md border border-line bg-surface px-2.5 py-1 text-sm">{s}</span>)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="space-y-12">
+      <div>
+        <h2 class="mb-6 font-display text-2xl font-semibold">{t('about.education')}</h2>
+        <div class="rounded-2xl border border-line bg-surface p-6">
+          <div class="font-mono text-xs text-accent">2016 – 2020</div>
+          <h3 class="mt-1 font-display text-lg font-semibold">{edu.org}</h3>
+          <p class="text-sm text-muted">{edu.role[lang]}</p>
+          <p class="mt-3 text-sm leading-relaxed text-muted">{edu.body[lang]}</p>
+        </div>
+      </div>
+      <div>
+        <h2 class="mb-6 font-display text-2xl font-semibold">{t('about.certs')}</h2>
+        <ul class="divide-y divide-line rounded-2xl border border-line bg-surface">
+          {certifications.map((c) => (
+            <li class="flex items-center justify-between gap-4 px-5 py-3.5 text-sm">
+              <span>{c.name}</span>
+              <span class="shrink-0 font-mono text-xs text-muted">{[c.issuer, c.date].filter(Boolean).join(' · ')}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2 class="mb-4 font-display text-2xl font-semibold">{t('about.beyond')}</h2>
+        <p class="leading-relaxed text-muted">{t('about.beyond.b')}</p>
+      </div>
+    </div>
+  </section>
+  <Contact lang={lang} />
+</Base>

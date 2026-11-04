@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://channghiep.io.vn/sitemap-index.xml
