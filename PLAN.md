@@ -22,7 +22,8 @@
 | Top skills (LinkedIn) | CAE · CFD · Software Development · Product Management · Python |
 | Kỹ năng theo vai trò | OpenFOAM, CFD · Product Management, Scrum · CAD, CAE · Tekla Structures, SAP2000 · Python |
 | Môn nền tảng ĐH | Phương pháp phần tử hữu hạn (FEM), Phân tích kết cấu, Ứng xử vật liệu, Tối ưu tham số |
-| Hoạt động | Đội trưởng đội tình nguyện chiến dịch Mùa Hè Xanh |
+| Hoạt động | Đội trưởng đội tình nguyện chiến dịch Mùa Hè Xanh; hoạt động Đoàn – Hội sinh viên |
+| Bổ sung (nguồn ngoài LinkedIn) | Khoá K2016; tốt nghiệp loại Giỏi; Trưởng nhóm Mô phỏng Lưu chất tại VPĐD TechnoStar (Nhật) ở VN. Chương trình Quốc tế (OISP) — đã được Nghiệp xác nhận |
 | **Hội thảo quốc tế** | **Báo cáo miệng (oral presentation) tại COMPSAFE 2025, Nhật Bản**: *Baffle Characteristics Optimization of Rectangular and Prismatic Tank Using Surrogate Model and CFD Simulation* (02–06/2025, thuộc TechnoStar) |
 | Chứng chỉ (chi tiết) | Mastering Claude Code & AI Agents [2026] (Udemy, 07/2026) · Introduction to Agent Skills (Anthropic, 07/2026, có credential ID) · Claude Code in Action · Scrum: The Basics |
 | Mục Skills | 28 kỹ năng; 2 kỹ năng đang ghim đầu là Project Management, Ubuntu |
