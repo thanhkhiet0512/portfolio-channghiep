@@ -38,7 +38,10 @@ const principles = [1, 2, 3] as const;
     <section class="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
       <div class:list={['grid gap-4', photos.length > 1 && 'sm:grid-cols-2']}>
         {photos.map((ph) => (
-          <img src={ph.src} alt={ph.alt[lang]} loading="lazy" class="aspect-[4/3] w-full rounded-2xl border border-line object-cover" />
+          <figure class="reveal">
+            <img src={ph.src} alt={ph.alt[lang]} loading="lazy" width="1400" height="1400" class="aspect-[4/5] w-full rounded-2xl border border-line object-cover" style={`object-position:${ph.pos}`} />
+            <figcaption class="mt-2 font-mono text-xs text-muted">{ph.caption[lang]}</figcaption>
+          </figure>
         ))}
       </div>
     </section>
