@@ -1,7 +1,7 @@
 # Phương án Portfolio — Nghiep Nguyen
 
 > Mục tiêu: **xây dựng thương hiệu cá nhân** · Ngôn ngữ: **Anh + Việt** · Có domain riêng
-> Nguồn dữ liệu: LinkedIn profile (PDF export, 11/2026)
+> Nguồn dữ liệu: LinkedIn profile (PDF export + ảnh chụp màn hình profile, 11/2026)
 
 ---
 
@@ -17,6 +17,13 @@
 | Luận văn | Phân tích tĩnh & động tấm gợn sóng bằng mô hình tấm trực hướng tương đương |
 | Định vị tự nhận | "Đưa thế giới vật lý, mô phỏng và digital twin về chung một hệ sinh thái" |
 | Chứng chỉ | Scrum: The Basics · Claude Code in Action · Intro to Agent Skills · Mastering Claude Code & AI Agents (2026) |
+| Tên đầy đủ | Nguyễn Chấn Nghiệp (theo chứng chỉ Udemy: "Nguyen Chan Nghiep") |
+| Mạng lưới | 799 followers · 500+ connections |
+| Top skills (LinkedIn) | CAE · CFD · Software Development · Product Management · Python |
+| Kỹ năng theo vai trò | OpenFOAM, CFD · Product Management, Scrum · CAD, CAE · Tekla Structures, SAP2000 · Python |
+| Môn nền tảng ĐH | Phương pháp phần tử hữu hạn (FEM), Phân tích kết cấu, Ứng xử vật liệu, Tối ưu tham số |
+| Hoạt động | Đội trưởng đội tình nguyện chiến dịch Mùa Hè Xanh |
+| Ảnh đại diện | Có: ảnh ở phố Tokyo (Ginza), áo xám, khoanh tay, cười tươi → `assets/avatar.png` (400×400) |
 
 ### 1.2 Hành trình nghề nghiệp (câu chuyện chính)
 
@@ -53,8 +60,10 @@
 |---|---|
 | Không có hình ảnh dự án (mô phỏng vốn rất "ăn ảnh") | Dùng ảnh/clip đã ẩn thông tin khách hàng, hoặc **tự chạy case benchmark public** (Ahmed body, DTC hull, dam break…) để làm visual |
 | Dự án công nghiệp có thể dính NDA | Case study viết dạng **ẩn danh** ("Tàu hàng 50.000 DWT", "Khách hàng ô tô Nhật") — *cần ổng xác nhận phạm vi được công bố* |
-| Top Skills trên LinkedIn yếu (Ubuntu, PM…) không phản ánh chuyên môn | Đổi thành **CFD · OpenFOAM · Digital Twin · Product Management · Python** |
-| Chưa có nội dung chia sẻ kiến thức (blog, GitHub, bài nói) | Thêm mục **Insights/Blog** — đây là động cơ chính của personal branding |
+| ~~Top Skills yếu~~ → ổng **đã cập nhật** (CAE, CFD, Software Dev, PM, Python) — PDF bị cũ | Có thể cân nhắc thêm **OpenFOAM** và **Digital Twin** |
+| Chưa có nội dung chia sẻ kiến thức (blog, GitHub, bài nói); bài đăng gần đây chỉ là thông báo chứng chỉ / đổi việc | Thêm mục **Insights/Blog** — đây là động cơ chính của personal branding |
+| Bài "Starting a new position" có 38 like, 9 comment → mạng lưới có tương tác tốt | Ra mắt portfolio bằng 1 bài LinkedIn có hình đẹp sẽ có đà lan toả |
+| Ảnh đại diện 400×400 — đủ cho avatar, hơi nhỏ cho ảnh lớn ở trang About | Xin bản gốc độ phân giải cao (≥1200px) |
 | Lỗi chính tả "Protecion" ở Akselos | Sửa thành "Protection" |
 | Phần Akselos còn sơ sài (3 gạch đầu dòng) | Bổ sung 1–2 kết quả cụ thể khi có (vd: AI agent giảm X giờ meshing) |
 
@@ -111,7 +120,7 @@
   └─ Contact CTA
 /work              Danh sách case study (lọc theo ngành: Maritime / Automotive / Energy / Oil & Gas / Software)
 /work/[slug]       Chi tiết: Bối cảnh → Thách thức → Cách tiếp cận → Kết quả → Công cụ
-/about             Câu chuyện, triết lý làm nghề, học vấn, chứng chỉ, ảnh
+/about             Câu chuyện, triết lý làm nghề, học vấn, chứng chỉ, ảnh, hoạt động (Mùa Hè Xanh)
 /insights          Blog (MDX) — kiến thức CFD, digital twin, AI cho kỹ sư
 /now               Đang làm gì / đang học gì (cập nhật hằng tháng)
 /cv                Bản CV có thể tải PDF
@@ -175,7 +184,7 @@
 ## 7. Cần ông anh cung cấp
 
 - [ ] **Tên domain** + quyền truy cập DNS (để trỏ về Vercel)
-- [ ] **Ảnh chân dung** chất lượng tốt (1 ảnh chính + 1–2 ảnh làm việc)
+- [x] **Ảnh chân dung** — đã có `assets/avatar.png` (400×400); xin thêm bản gốc độ phân giải cao + 1–2 ảnh lúc làm việc
 - [ ] **Hình ảnh/clip mô phỏng** được phép công bố (contour, streamline, mesh…)
 - [ ] Xác nhận **dự án nào được nêu tên/công bố**, dự án nào phải ẩn danh
 - [ ] **Email liên hệ** muốn hiển thị, link GitHub (nếu có)
@@ -188,7 +197,7 @@
 ## 8. Việc nên làm song song trên LinkedIn
 
 1. Sửa headline: `Senior Application Engineer @ Akselos | CFD · Digital Twins · AI Automation`
-2. Đổi Top Skills: CFD, OpenFOAM, Digital Twin, Product Management, Python
+2. ~~Đổi Top Skills~~ — đã làm (CAE, CFD, Software Dev, PM, Python)
 3. Sửa lỗi "Protecion" → "Protection"
 4. Thêm website vào mục Contact + mục **Featured** (link case study nổi bật)
 5. Mỗi bài blog mới → đăng bản rút gọn lên LinkedIn kèm link về site
