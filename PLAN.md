@@ -23,6 +23,10 @@
 | Kỹ năng theo vai trò | OpenFOAM, CFD · Product Management, Scrum · CAD, CAE · Tekla Structures, SAP2000 · Python |
 | Môn nền tảng ĐH | Phương pháp phần tử hữu hạn (FEM), Phân tích kết cấu, Ứng xử vật liệu, Tối ưu tham số |
 | Hoạt động | Đội trưởng đội tình nguyện chiến dịch Mùa Hè Xanh |
+| **Hội thảo quốc tế** | **Báo cáo miệng (oral presentation) tại COMPSAFE 2025, Nhật Bản**: *Baffle Characteristics Optimization of Rectangular and Prismatic Tank Using Surrogate Model and CFD Simulation* (02–06/2025, thuộc TechnoStar) |
+| Chứng chỉ (chi tiết) | Mastering Claude Code & AI Agents [2026] (Udemy, 07/2026) · Introduction to Agent Skills (Anthropic, 07/2026, có credential ID) · Claude Code in Action · Scrum: The Basics |
+| Mục Skills | 28 kỹ năng; 2 kỹ năng đang ghim đầu là Project Management, Ubuntu |
+| Quan tâm | Theo dõi Bill Gates (năng lượng), Chip Huyen (AI) → quan tâm AI × năng lượng/kỹ thuật |
 | Ảnh đại diện | Có: ảnh ở phố Tokyo (Ginza), áo xám, khoanh tay, cười tươi → `assets/avatar.png` (400×400) |
 
 ### 1.2 Hành trình nghề nghiệp (câu chuyện chính)
@@ -48,6 +52,7 @@
 
 ### 1.4 Điểm mạnh — thứ khiến ổng "hiếm"
 
+0. **Đã lên sân khấu quốc tế:** báo cáo tại COMPSAFE 2025 (Nhật) → bằng chứng uy tín mạnh nhất, phải đặt ở trang chủ.
 1. **Bộ ba ít ai có:** Vật lý/mô phỏng sâu + Quản lý sản phẩm phần mềm + Tự động hoá bằng AI Agent.
    Kỹ sư CFD thì nhiều, PM thì nhiều, nhưng người vừa chạy OpenFOAM trên Slurm vừa định roadmap solver vừa build AI agent cho meshing thì rất ít.
 2. **Đa miền ứng dụng:** hàng hải (trim tàu, sloshing, cargo tank), ô tô (nhiệt, khí động), năng lượng (trao đổi nhiệt), dầu khí (pipeline FFS).
@@ -113,6 +118,7 @@
 /                  Trang chủ
   ├─ Hero (fluid sim + tagline + CTA: Xem dự án / Liên hệ)
   ├─ Impact numbers (40–60%, 12–18%, ±5%, 3%, 8+ dự án)
+  ├─ Dải uy tín: "Speaker @ COMPSAFE 2025, Japan" · Akselos · TechnoStar · HCMUT
   ├─ "What I do" — 3 trụ: Simulation · Product · AI Automation
   ├─ Featured case studies (3 thẻ)
   ├─ Journey timeline (Kết cấu → CFD → PM → Digital Twin)
@@ -121,6 +127,7 @@
 /work              Danh sách case study (lọc theo ngành: Maritime / Automotive / Energy / Oil & Gas / Software)
 /work/[slug]       Chi tiết: Bối cảnh → Thách thức → Cách tiếp cận → Kết quả → Công cụ
 /about             Câu chuyện, triết lý làm nghề, học vấn, chứng chỉ, ảnh, hoạt động (Mùa Hè Xanh)
+/talks             Bài báo cáo & hội thảo (COMPSAFE 2025 + slide/abstract)
 /insights          Blog (MDX) — kiến thức CFD, digital twin, AI cho kỹ sư
 /now               Đang làm gì / đang học gì (cập nhật hằng tháng)
 /cv                Bản CV có thể tải PDF
@@ -134,16 +141,17 @@
 | 1 | Tối ưu trim & hiệu suất năng lượng tàu | Maritime | Tiết kiệm tới 3% năng lượng |
 | 2 | Giảm lực cản khí động | Automotive | −12–18% drag |
 | 3 | Kiểm chứng nhiệt bộ trao đổi nhiệt | Energy | ±5% so với thực nghiệm |
-| 4 | Tối ưu baffle bồn sloshing bằng surrogate model | Maritime | Kết hợp CFD + ML |
+| 4 | ⭐ Tối ưu baffle bồn sloshing bằng surrogate model | Maritime | CFD + ML, **báo cáo tại COMPSAFE 2025 (Nhật)** → case study chủ lực |
 | 5 | Phân tích nhiệt–dòng chảy cargo tank | Maritime | Phân bố nhiệt độ, truyền nhiệt |
 | 6 | Phát hiện cavitation hệ thống xả | Automotive | |
 | 7 | Jupiter CFD — roadmap sản phẩm & tăng tốc solver | Software / PM | −40–60% thời gian mô phỏng |
 | 8 | AI Agent tự động hoá meshing | AI / Digital Twin | Dự án hiện tại ở Akselos |
 | 9 | Đánh giá FFS chống sụp dẻo đường ống | Oil & Gas | |
 
-→ Bản đầu chọn **4–5 case mạnh nhất** (1, 2, 4, 7, 8), còn lại thêm dần.
+→ Bản đầu chọn **4–5 case mạnh nhất** (**4** làm case chủ lực, rồi 1, 2, 7, 8), còn lại thêm dần.
 
 ### 4.2 Ý tưởng 6 bài blog đầu (để kéo traffic từ LinkedIn)
+0. Những gì tôi trình bày ở COMPSAFE 2025: surrogate model tối ưu baffle bồn chứa
 1. OpenFOAM vs Fluent vs STAR-CCM+: 6 năm cross-validate rút ra được gì
 2. Từ kỹ sư CFD sang Product Manager: những điều không ai dạy
 3. Dùng AI Agent để tự động hoá meshing — thực tế vs kỳ vọng
@@ -187,6 +195,7 @@
 - [x] **Ảnh chân dung** — đã có `assets/avatar.png` (400×400); xin thêm bản gốc độ phân giải cao + 1–2 ảnh lúc làm việc
 - [ ] **Hình ảnh/clip mô phỏng** được phép công bố (contour, streamline, mesh…)
 - [ ] Xác nhận **dự án nào được nêu tên/công bố**, dự án nào phải ẩn danh
+- [ ] Slide / abstract / ảnh lúc báo cáo ở **COMPSAFE 2025** (nếu được chia sẻ)
 - [ ] **Email liên hệ** muốn hiển thị, link GitHub (nếu có)
 - [ ] File **CV PDF** mới nhất
 - [ ] Chi tiết thêm cho từng case study: bối cảnh, khó khăn, cách giải, hình ảnh
@@ -198,6 +207,7 @@
 
 1. Sửa headline: `Senior Application Engineer @ Akselos | CFD · Digital Twins · AI Automation`
 2. ~~Đổi Top Skills~~ — đã làm (CAE, CFD, Software Dev, PM, Python)
-3. Sửa lỗi "Protecion" → "Protection"
-4. Thêm website vào mục Contact + mục **Featured** (link case study nổi bật)
-5. Mỗi bài blog mới → đăng bản rút gọn lên LinkedIn kèm link về site
+3. Ghim lại mục Skills: đưa CFD, OpenFOAM lên đầu thay cho Project Management, Ubuntu
+4. Sửa lỗi "Protecion" → "Protection"
+5. Thêm website vào mục Contact + mục **Featured** (link case study nổi bật)
+6. Mỗi bài blog mới → đăng bản rút gọn lên LinkedIn kèm link về site
