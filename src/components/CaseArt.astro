@@ -1,0 +1,148 @@
+---
+/** Schematic, illustrative line art for each case study (not real results). */
+import type { Project } from '../data/profile';
+interface Props { art: Project['art']; class?: string }
+const { art, class: cls = '' } = Astro.props;
+const id = `g-${art}-${Math.random().toString(36).slice(2, 7)}`;
+const lines = (n: number, f: (i: number) => string) => Array.from({ length: n }, (_, i) => f(i));
+---
+<svg viewBox="0 0 400 250" class:list={['block h-full w-full', cls]} role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id={`${id}-cm`} x1="0" x2="1">
+      <stop offset="0" stop-color="#1e3a8a" /><stop offset=".25" stop-color="#0284c7" /><stop offset=".5" stop-color="#22d3ee" />
+      <stop offset=".7" stop-color="#a3e635" /><stop offset=".85" stop-color="#fbbf24" /><stop offset="1" stop-color="#f87171" />
+    </linearGradient>
+    <linearGradient id={`${id}-v`} x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#22d3ee" /><stop offset="1" stop-color="#1e3a8a" />
+    </linearGradient>
+    <pattern id={`${id}-grid`} width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0H0V20" fill="none" stroke="currentColor" stroke-opacity=".07" />
+    </pattern>
+  </defs>
+  <rect width="400" height="250" fill={`url(#${id}-grid)`} />
+
+  {art === 'tank' && (
+    <g>
+      <path d="M60 50h280v160H60z" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="2" />
+      <path d="M62 140 C 110 105, 150 100, 200 125 S 290 165, 338 120 V208 H62z" fill={`url(#${id}-v)`} opacity=".75">
+        <animate attributeName="d" dur="5s" repeatCount="indefinite"
+          values="M62 140 C 110 105, 150 100, 200 125 S 290 165, 338 120 V208 H62z;M62 115 C 110 150, 160 160, 200 130 S 290 100, 338 145 V208 H62z;M62 140 C 110 105, 150 100, 200 125 S 290 165, 338 120 V208 H62z" />
+      </path>
+      <rect x="146" y="150" width="6" height="60" fill="#fbbf24" />
+      <rect x="248" y="150" width="6" height="60" fill="#fbbf24" />
+      <rect x="196" y="52" width="6" height="45" fill="#fbbf24" />
+      <text x="60" y="36" font-family="JetBrains Mono, monospace" font-size="11" fill="currentColor" fill-opacity=".6">baffle h / H · surrogate f(x) ≈ CFD</text>
+    </g>
+  )}
+
+  {art === 'hull' && (
+    <g>
+      <path d="M0 130 H400" stroke="#22d3ee" stroke-opacity=".5" stroke-dasharray="4 6" />
+      <path d="M70 105 H300 Q 345 108 360 130 Q 330 170 270 172 H95 Q 70 165 62 130z" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-opacity=".6" stroke-width="2" transform="rotate(-2 210 140)" />
+      {lines(6, (i) => `M0 ${150 + i * 14} C 80 ${150 + i * 14}, 120 ${178 + i * 10}, 210 ${180 + i * 10} S 340 ${160 + i * 14}, 400 ${150 + i * 14}`).map((d, i) => (
+        <path d={d} fill="none" stroke={`url(#${id}-cm)`} stroke-width="1.5" opacity={1 - i * 0.12} />
+      ))}
+      <text x="20" y="40" font-family="JetBrains Mono, monospace" font-size="11" fill="currentColor" fill-opacity=".6">trim θ → R_T min</text>
+    </g>
+  )}
+
+  {art === 'body' && (
+    <g>
+      {lines(9, (i) => {
+        const y = 40 + i * 21;
+        const near = Math.max(0, 1 - Math.abs(y - 125) / 90);
+        const dy = (y < 125 ? -1 : 1) * near * 34;
+        return `M0 ${y} C 90 ${y}, 120 ${y + dy}, 200 ${y + dy} S 300 ${y + dy * 0.4}, 400 ${y}`;
+      }).map((d) => <path d={d} fill="none" stroke={`url(#${id}-cm)`} stroke-width="1.5" />)}
+      <path d="M120 150 V115 Q120 95 145 95 H260 L285 120 V150z" fill="currentColor" fill-opacity=".1" stroke="currentColor" stroke-opacity=".7" stroke-width="2" />
+      <circle cx="300" cy="140" r="10" fill="none" stroke="#f87171" stroke-opacity=".7"><animate attributeName="r" values="6;14;6" dur="2.4s" repeatCount="indefinite" /></circle>
+      <circle cx="330" cy="118" r="8" fill="none" stroke="#fbbf24" stroke-opacity=".7"><animate attributeName="r" values="10;5;10" dur="2.4s" repeatCount="indefinite" /></circle>
+      <text x="20" y="235" font-family="JetBrains Mono, monospace" font-size="11" fill="currentColor" fill-opacity=".6">C_d ↓ 12–18%</text>
+    </g>
+  )}
+
+  {art === 'exchanger' && (
+    <g>
+      <rect x="40" y="60" width="320" height="130" rx="10" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="2" />
+      {lines(5, (i) => `${80 + i * 0}`).map((_, i) => (
+        <rect x="55" y={78 + i * 22} width="290" height="8" rx="4" fill={`url(#${id}-cm)`} opacity=".85" />
+      ))}
+      <path d="M20 125 H40 M360 125 H380" stroke="currentColor" stroke-opacity=".6" stroke-width="2" />
+      {[60, 120, 180, 240, 300].map((x, i) => (
+        <circle cx={x + 20} cy={i % 2 ? 210 : 40} r="4" fill="none" stroke="#fbbf24" />
+      ))}
+      <text x="40" y="236" font-family="JetBrains Mono, monospace" font-size="11" fill="currentColor" fill-opacity=".6">CFD vs. experiment: ±5%</text>
+    </g>
+  )}
+
+  {art === 'roadmap' && (
+    <g>
+      <path d="M30 190 C 120 190, 140 120, 220 120 S 330 60, 370 60" fill="none" stroke={`url(#${id}-cm)`} stroke-width="3" />
+      {[[30, 190, 'v1'], [130, 160, 'turbulence'], [220, 120, 'multiphase'], [300, 85, 'HPC'], [370, 60, 'faster']].map(([x, y, l]) => (
+        <g>
+          <circle cx={x} cy={y} r="7" fill="var(--surface, #0d1524)" stroke="currentColor" stroke-width="2" />
+          <text x={Number(x)} y={Number(y) + 24} text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="currentColor" fill-opacity=".65">{l}</text>
+        </g>
+      ))}
+      <text x="30" y="45" font-family="JetBrains Mono, monospace" font-size="11" fill="currentColor" fill-opacity=".6">turnaround −40–60%</text>
+    </g>
+  )}
+
+  {art === 'mesh' && (
+    <g>
+      {(() => {
+        const pts: [number, number][] = [];
+        for (let r = 0; r < 6; r++) for (let c = 0; c < 9; c++) pts.push([60 + c * 35 + (r % 2) * 17, 45 + r * 32]);
+        const tris: string[] = [];
+        for (let r = 0; r < 5; r++) for (let c = 0; c < 8; c++) {
+          const a = pts[r * 9 + c], b = pts[r * 9 + c + 1], d = pts[(r + 1) * 9 + c], e = pts[(r + 1) * 9 + c + 1];
+          tris.push(`M${a} L${b} L${r % 2 ? e : d}z`, `M${b} L${e} L${d}z`);
+        }
+        return tris.map((d, i) => (
+          <path d={d} fill={i % 7 === 0 ? '#22d3ee' : 'none'} fill-opacity=".15" stroke="currentColor" stroke-opacity=".35">
+            {i % 5 === 0 && <animate attributeName="stroke-opacity" values=".15;.8;.15" dur="3s" begin={`${(i % 12) * 0.25}s`} repeatCount="indefinite" />}
+          </path>
+        ));
+      })()}
+      <rect x="250" y="190" width="120" height="34" rx="8" fill="var(--surface, #0d1524)" stroke="#fbbf24" />
+      <text x="310" y="211" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#fbbf24">agent › mesh()</text>
+    </g>
+  )}
+
+  {art === 'pipe' && (
+    <g>
+      <circle cx="200" cy="125" r="85" fill="none" stroke={`url(#${id}-cm)`} stroke-width="16" />
+      <circle cx="200" cy="125" r="70" fill="none" stroke="currentColor" stroke-opacity=".3" />
+      <path d="M250 60 q 10 8 6 18" stroke="#f87171" stroke-width="3" fill="none" />
+      {lines(8, (i) => `${i}`).map((_, i) => {
+        const a = (i / 8) * Math.PI * 2;
+        return <path d={`M${200 + Math.cos(a) * 30} ${125 + Math.sin(a) * 30} L${200 + Math.cos(a) * 58} ${125 + Math.sin(a) * 58}`} stroke="currentColor" stroke-opacity=".5" marker-end="" />;
+      })}
+      <text x="20" y="235" font-family="JetBrains Mono, monospace" font-size="11" fill="currentColor" fill-opacity=".6">FFS · plastic collapse</text>
+    </g>
+  )}
+
+  {art === 'cargo' && (
+    <g>
+      <rect x="70" y="50" width="260" height="150" rx="16" fill="currentColor" fill-opacity=".05" stroke="currentColor" stroke-opacity=".5" stroke-width="2" />
+      <rect x="72" y="52" width="256" height="146" rx="14" fill={`url(#${id}-v)`} opacity=".25" />
+      <ellipse cx="160" cy="125" rx="60" ry="50" fill="none" stroke="#fbbf24" stroke-opacity=".7" stroke-dasharray="6 5"><animate attributeName="stroke-dashoffset" from="0" to="-22" dur="1.5s" repeatCount="indefinite" /></ellipse>
+      <ellipse cx="250" cy="125" rx="55" ry="48" fill="none" stroke="#22d3ee" stroke-opacity=".7" stroke-dasharray="6 5"><animate attributeName="stroke-dashoffset" from="0" to="22" dur="1.5s" repeatCount="indefinite" /></ellipse>
+      <rect x="90" y="186" width="220" height="5" rx="2" fill="#f87171" opacity=".7" />
+      <text x="70" y="35" font-family="JetBrains Mono, monospace" font-size="11" fill="currentColor" fill-opacity=".6">T(x, y) · natural convection</text>
+    </g>
+  )}
+
+  {art === 'exhaust' && (
+    <g>
+      <path d="M20 95 H170 Q 200 95 215 110 L 235 125 Q 250 140 280 140 H380 M20 155 H170 Q 200 155 215 145 L 235 135 Q 250 160 280 160 H380" fill="none" stroke="currentColor" stroke-opacity=".6" stroke-width="2" />
+      {lines(3, (i) => `${i}`).map((_, i) => (
+        <path d={`M20 ${112 + i * 13} H170 Q 205 ${118 + i * 6} 235 ${132 + i * 3} T 380 ${145 + i * 6}`} fill="none" stroke={`url(#${id}-cm)`} stroke-width="1.5" />
+      ))}
+      {[[240, 128, 4], [255, 134, 3], [268, 130, 5], [282, 136, 3]].map(([x, y, r], i) => (
+        <circle cx={x} cy={y} r={r} fill="#e6edf7" fill-opacity=".7"><animate attributeName="cx" from={String(x)} to={String(Number(x) + 60)} dur="2s" begin={`${i * 0.4}s`} repeatCount="indefinite" /></circle>
+      ))}
+      <text x="20" y="40" font-family="JetBrains Mono, monospace" font-size="11" fill="currentColor" fill-opacity=".6">p &lt; p_vap → cavitation</text>
+    </g>
+  )}
+</svg>

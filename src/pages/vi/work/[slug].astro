@@ -1,0 +1,9 @@
+---
+import V from '../../../views/WorkDetail.astro';
+import { projects } from '../../../data/profile';
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props;
+---
+<V lang="vi" p={p} />

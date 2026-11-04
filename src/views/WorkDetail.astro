@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+import CaseArt from '../components/CaseArt.astro';
+import Contact from '../components/Contact.astro';
+import { projects, industries, talks, type Lang, type Project } from '../data/profile';
+import { useT, href } from '../data/i18n';
+interface Props { lang: Lang; p: Project }
+const { lang, p } = Astro.props;
+const t = useT(lang);
+const idx = projects.findIndex((x) => x.slug === p.slug);
+const next = projects[(idx + 1) % projects.length];
+const talk = talks.find((x) => x.project === p.slug);
+---
+<Base lang={lang} title={p.title[lang]} description={p.summary[lang]}>
+  <article>
+    <header class="mesh-bg border-b border-line">
+      <div class="mx-auto max-w-4xl px-4 pb-12 pt-36 sm:px-6">
+        <a href={href(lang, '/work')} class="mb-8 inline-block text-sm text-muted hover:text-accent">← {t('work.back')}</a>
+        <div class="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted">
+          <span class="text-accent">{industries[p.industry][lang]}</span><span>·</span><span>{p.org}</span><span>·</span><span>{p.period}</span>
+          {p.highlight && <span class="ml-2 rounded-full bg-warm/15 px-2.5 py-0.5 normal-case tracking-normal text-warm ring-1 ring-warm/40">★ {p.highlight[lang]}</span>}
+        </div>
+        <h1 class="mt-4 font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl">{p.title[lang]}</h1>
+        <p class="mt-5 text-lg leading-relaxed text-muted">{p.summary[lang]}</p>
+      </div>
+    </header>
+
+    <div class="mx-auto max-w-5xl px-4 sm:px-6">
+      <div class="-mt-px overflow-hidden rounded-b-3xl border border-t-0 border-line bg-surface-2 text-ink">
+        <div class="aspect-[16/8]"><CaseArt art={p.art} /></div>
+      </div>
+    </div>
+
+    <div class="mx-auto grid max-w-4xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-[1fr_220px]">
+      <div class="space-y-12">
+        <section>
+          <h2 class="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-accent">{t('work.context')}</h2>
+          <p class="text-lg leading-relaxed">{p.context[lang]}</p>
+        </section>
+        <section>
+          <h2 class="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent">{t('work.approach')}</h2>
+          <ol class="space-y-4">
+            {p.approach.map((a, i) => (
+              <li class="flex gap-4">
+                <span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-line font-mono text-xs text-muted">{String(i + 1).padStart(2, '0')}</span>
+                <span class="leading-relaxed">{a[lang]}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+        <section>
+          <h2 class="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-accent">{t('work.outcome')}</h2>
+          <ul class="space-y-3">
+            {p.outcome.map((o) => (
+              <li class="flex gap-3 rounded-xl border border-line bg-surface p-4"><span class="text-warm">▲</span><span class="leading-relaxed">{o[lang]}</span></li>
+            ))}
+          </ul>
+          {talk && (
+            <a href={talk.url} target="_blank" rel="noopener" class="mt-4 inline-block text-sm font-medium text-accent hover:underline">{talk.event} ↗</a>
+          )}
+        </section>
+      </div>
+      <aside class="space-y-8 md:sticky md:top-24 md:self-start">
+        {p.metric && (
+          <div class="rounded-2xl border border-line bg-surface p-5">
+            <div class="font-display text-4xl font-bold text-accent">{p.metric.value}</div>
+            <div class="mt-1 text-sm text-muted">{p.metric.label[lang]}</div>
+          </div>
+        )}
+        <div>
+          <h2 class="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-muted">{t('work.tools')}</h2>
+          <div class="flex flex-wrap gap-1.5">
+            {p.tools.map((x) => <span class="rounded-md bg-surface-2 px-2 py-1 font-mono text-xs text-muted">{x}</span>)}
+          </div>
+        </div>
+        <p class="text-xs leading-relaxed text-muted">{t('work.note')}</p>
+      </aside>
+    </div>
+
+    <div class="mx-auto max-w-4xl px-4 pb-20 sm:px-6">
+      <a href={href(lang, `/work/${next.slug}`)} class="group flex items-center justify-between gap-6 rounded-2xl border border-line bg-surface p-6 transition hover:border-accent/60">
+        <div>
+          <div class="font-mono text-xs uppercase tracking-wider text-muted">{t('work.next')}</div>
+          <div class="mt-1 font-display text-xl font-semibold">{next.title[lang]}</div>
+        </div>
+        <span class="text-2xl text-accent transition group-hover:translate-x-1">→</span>
+      </a>
+    </div>
+  </article>
+  <Contact lang={lang} />
+</Base>
