@@ -313,10 +313,10 @@ export const journey: Step[] = [
   {
     year: '2016',
     org: 'Ho Chi Minh City University of Technology',
-    role: { en: 'B.Eng. Engineering Mechanics', vi: 'Kỹ sư Cơ Kỹ Thuật' },
+    role: { en: 'B.Eng. Engineering Mechanics · International Program (OISP)', vi: 'Kỹ sư Cơ Kỹ Thuật · Chương trình Quốc tế (OISP)' },
     body: {
-      en: 'Finite element method, structural analysis, behavior of materials, parameter optimization. GPA 8.16/10. Led a volunteer team in the Green Summer campaign.',
-      vi: 'Phương pháp phần tử hữu hạn, phân tích kết cấu, ứng xử vật liệu, tối ưu tham số. GPA 8.16/10. Đội trưởng đội tình nguyện Mùa Hè Xanh.',
+      en: 'Class of 2016, HCMUT – VNU-HCM. Finite element method, structural analysis, behavior of materials, parameter optimization. Graduated with a Very Good degree (GPA 8.16/10). Active in the Youth Union and Student Association; led a volunteer team in the Green Summer campaign.',
+      vi: 'Khoá K2016, ĐH Bách Khoa – ĐHQG TP.HCM. Phương pháp phần tử hữu hạn, phân tích kết cấu, ứng xử vật liệu, tối ưu tham số. Tốt nghiệp loại Giỏi (GPA 8.16/10). Tích cực trong hoạt động Đoàn – Hội sinh viên; đội trưởng đội tình nguyện Mùa Hè Xanh.',
     },
     kind: 'edu',
   },
@@ -343,10 +343,10 @@ export const journey: Step[] = [
   {
     year: '2020',
     org: 'TechnoStar',
-    role: { en: 'Senior CFD Engineer', vi: 'Senior CFD Engineer' },
+    role: { en: 'Senior CFD Engineer · CFD Team Lead', vi: 'Senior CFD Engineer · Trưởng nhóm CFD' },
     body: {
-      en: 'Led CFD R&D across 8+ industrial projects with OpenFOAM — marine, automotive and thermal — cross-validated with Fluent and STAR-CCM+, run on Linux clusters with Bash and Slurm.',
-      vi: 'Dẫn dắt R&D CFD cho hơn 8 dự án công nghiệp với OpenFOAM — hàng hải, ô tô, nhiệt — kiểm chứng chéo với Fluent và STAR-CCM+, chạy trên cluster Linux với Bash và Slurm.',
+      en: 'Led the fluid simulation team at the Vietnam office of TechnoStar (Japan). Led CFD R&D across 8+ industrial projects with OpenFOAM — marine, automotive and thermal — cross-validated with Fluent and STAR-CCM+, run on Linux clusters with Bash and Slurm.',
+      vi: 'Trưởng nhóm Mô phỏng Lưu chất tại văn phòng đại diện TechnoStar (Nhật Bản) ở Việt Nam. Dẫn dắt R&D CFD cho hơn 8 dự án công nghiệp với OpenFOAM — hàng hải, ô tô, nhiệt — kiểm chứng chéo với Fluent và STAR-CCM+, chạy trên cluster Linux với Bash và Slurm.',
     },
     kind: 'work',
   },
